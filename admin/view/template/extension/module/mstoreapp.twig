@@ -1,0 +1,322 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-module" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if error_warning %}
+    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+      </div>
+      <div class="panel-body">
+
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#tab-module-setting" data-toggle="tab">Module settings</a></li-->
+          <!--li><a href="#tab-app-setting" data-toggle="tab">App settings</a></li>
+          <li><a href="#tab-dimensions" data-toggle="tab">Dimensions (Ionic)</a></li>
+          <li><a href="#tab-import-demo" data-toggle="tab">Import demo</a></li-->
+        </ul>
+        
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-module" class="form-horizontal">
+        <div class="tab-content">
+          
+            <div class="tab-pane active" id="tab-module-setting">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+                  <div class="col-sm-10">
+                    <select name="module_mstoreapp_status" id="input-status" class="form-control">
+                      {% if module_mstoreapp_status %}
+                      <option value="1" selected="selected">{{ text_enabled }}</option>
+                      <option value="0">{{ text_disabled }}</option>
+                      {% else %}
+                      <option value="1">{{ text_enabled }}</option>
+                      <option value="0" selected="selected">{{ text_disabled }}</option>
+                      {% endif %}
+                    </select>
+                  </div>
+                </div>
+
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" for="input_firebase_server_key">{{ entry_firebase_server_key }}</label>
+                    <div class="col-sm-10">
+                      <input type="text" name="mstoreapp_firebase_server_key" value="{{ mstoreapp_firebase_server_key }}" placeholder="{{ entry_firebase_server_key }}" id="input_google_project_id" class="form-control" />
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" for="input_firebase_project_id">{{ entry_firebase_project_id }}</label>
+                    <div class="col-sm-10">
+                      <input type="text" name="mstoreapp_firebase_project_id" value="{{ mstoreapp_firebase_project_id }}" placeholder="{{ entry_firebase_project_id }}" id="input_google_project_id" class="form-control" />
+                    </div>
+                  </div>
+                
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" for="input_firebase_web_api_key">{{ entry_firebase_web_api_key }}</label>
+                    <div class="col-sm-10">
+                      <input type="text" name="mstoreapp_firebase_web_api_key" value="{{ mstoreapp_firebase_web_api_key }}" placeholder="{{ entry_firebase_web_api_key }}" id="input_firebase_web_api_key" class="form-control" />
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" for="input_onesignal_app_id">{{ entry_onesignal_app_id }}</label>
+                    <div class="col-sm-10">
+                      <input type="text" name="mstoreapp_onesignal_app_id" value="{{ mstoreapp_onesignal_app_id }}" placeholder="{{ entry_onesignal_app_id }}" id="input_onesignal_app_id" class="form-control" />
+                    </div>
+                  </div>
+
+                
+            </div>
+        
+
+
+      <!--div class="tab-pane" id="tab-app-setting">
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input_support_email ">{{ entry_support_email }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="mstoreapp_support_email" value="{{ mstoreapp_support_email }}" placeholder="{{ entry_support_email }}" id="input_support_email" class="form-control" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input_firebase_web_api_key ">{{ entry_firebase_web_api_key }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="mstoreapp_firebase_web_api_key" value="{{ mstoreapp_firebase_web_api_key }}" placeholder="{{ entry_firebase_web_api_key }}" id="input_firebase_web_api_key" class="form-control" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input_onesignal_app_id ">{{ entry_onesignal_app_id }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="mstoreapp_onesignal_app_id" value="{{ mstoreapp_onesignal_app_id }}" placeholder="{{ entry_onesignal_app_id }}" id="input_onesignal_app_id" class="form-control" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input_google_project_id ">{{ entry_google_project_id }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="mstoreapp_google_project_id" value="{{ mstoreapp_google_project_id }}" placeholder="{{ entry_google_project_id }}" id="input_google_project_id" class="form-control" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input_phone ">{{ entry_phone }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="mstoreapp_phone" value="{{ mstoreapp_phone }}" placeholder="{{ entry_phone }}" id="input_phone" class="form-control" />
+            </div>
+          </div> 
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input_fb_url ">{{ entry_fb_url }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="mstoreapp_fb_url" value="{{ mstoreapp_fb_url }}" placeholder="{{ entry_fb_url }}" id="input_fb_url" class="form-control" />
+            </div>
+          </div> 
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input_twitter_url">{{ entry_twitter_url }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="mstoreapp_twitter_url" value="{{ mstoreapp_twitter_url }}" placeholder="{{ entry_twitter_url }}" id="input_twitter_url" class="form-control" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input_gp_url">{{ entry_gp_url }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="mstoreapp_gp_url" value="{{ mstoreapp_gp_url }}" placeholder="{{ entry_gp_url }}" id="input_gp_url" class="form-control" />
+            </div>
+          </div> 
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input_rate_app_ios">{{ entry_rate_app_ios }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="mstoreapp_rate_app_ios" value="{{ mstoreapp_rate_app_ios }}" placeholder="{{ entry_rate_app_ios }}" id="input_rate_app_ios" class="form-control" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="rate_app_android">{{ entry_rate_app_android }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="mstoreapp_rate_app_android" value="{{ mstoreapp_rate_app_android }}" placeholder="{{ entry_rate_app_android }}" id="rate_app_android" class="form-control" />
+            </div>
+          </div>
+
+      </div-->
+
+      <!--div class="tab-pane" id="tab-dimensions">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="imageHeight">Product image height ratio</label>
+                  <div class="col-sm-2">
+                    <input type="number" name="mstoreapp_imageHeight" value="{{ mstoreapp_imageHeight }}" placeholder="" id="imageHeight" class="form-control" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="productSliderWidth">Width of product in scroll</label>
+                  <div class="col-sm-2">
+                    <input type="number" name="mstoreapp_productSliderWidth" value="{{ mstoreapp_productSliderWidth }}" placeholder="" id="productSliderWidth" class="form-control" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="productBorderRadius">Product border radius</label>
+                  <div class="col-sm-2">
+                    <input type="number" name="mstoreapp_productBorderRadius" value="{{ mstoreapp_productBorderRadius }}" placeholder="" id="productBorderRadius" class="form-control" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="productPadding">Width of between product</label>
+                  <div class="col-sm-2">
+                    <input type="number" name="mstoreapp_productPadding" value="{{ mstoreapp_productPadding }}" placeholder="" id="productPadding" class="form-control" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="latestPerRow">Products per row in Home Screen</label>
+                  <div class="col-sm-10">
+                    <select name="mstoreapp_latestPerRow" id="latestPerRow" class="form-control">
+                      <option value="1" {% if mstoreapp_latestPerRow == 1 %} selected="selected"{% endif %}>1</option>
+                      <option value="2" {% if mstoreapp_latestPerRow == 2 %} selected="selected"{% endif %}>2</option>
+                      <option value="3" {% if mstoreapp_latestPerRow == 3 %} selected="selected"{% endif %}>3</option>
+                      <option value="4" {% if mstoreapp_latestPerRow == 4 %} selected="selected"{% endif %}>4</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="productsPerRow">Products per row in Products Screen</label>
+                  <div class="col-sm-10">
+                    <select name="mstoreapp_productsPerRow" id="productsPerRow" class="form-control">
+                      <option value="1" {% if mstoreapp_productsPerRow == 1 %} selected="selected"{% endif %}>1</option>
+                      <option value="2" {% if mstoreapp_productsPerRow == 2 %} selected="selected"{% endif %}>2</option>
+                      <option value="3" {% if mstoreapp_productsPerRow == 3 %} selected="selected"{% endif %}>3</option>
+                      <option value="4" {% if mstoreapp_productsPerRow == 4 %} selected="selected"{% endif %}>4</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="searchPerRow">Products per row in Search Screen</label>
+                  <div class="col-sm-10">
+                    <select name="mstoreapp_searchPerRow" id="searchPerRow" class="form-control">
+                      <option value="1" {% if mstoreapp_searchPerRow == 1 %} selected="selected"{% endif %}>1</option>
+                      <option value="2" {% if mstoreapp_searchPerRow == 2 %} selected="selected"{% endif %}>2</option>
+                      <option value="3" {% if mstoreapp_searchPerRow == 3 %} selected="selected"{% endif %}>3</option>
+                      <option value="4" {% if mstoreapp_searchPerRow == 4 %} selected="selected"{% endif %}>4</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="productShadow">Products box shadow</label>
+                  <div class="col-sm-10">
+                    <select name="mstoreapp_productShadow" id="productShadow" class="form-control">
+                      <option value="shadow" {% if mstoreapp_productShadow == 'shadow' %} selected="selected"{% endif %}>Apply Shadow</option>
+                      <option value="noshadow" {% if mstoreapp_productShadow == 'noshadow' %} selected="selected"{% endif %}>Do not Apply Shadow</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="ripple_effect">Products Click Effect</label>
+                  <div class="col-sm-10">
+                    <select name="mstoreapp_ripple_effect" id="ripple_effect" class="form-control">
+                      <option value="md" {% if mstoreapp_ripple_effect == 'md' %} selected="selected"{% endif %}>Ripple Effect</option>
+                      <option value="ios" {% if mstoreapp_ripple_effect == 'ios' %} selected="selected"{% endif %}>Animation</option>
+                    </select>
+                  </div>
+                </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="theme_Header">Header Color</label>
+                <div class="col-sm-10">
+                  <select name="mstoreapp_themeHeader" id="theme_Header" class="form-control">
+                    <option value="background" {% if mstoreapp_themeHeader == 'background' %} selected="selected"{% endif %}>Background</option>
+                    <option value="custom1" {% if mstoreapp_themeHeader == 'custom1' %} selected="selected"{% endif %}>Custom 1</option>
+                    <option value="custom2" {% if mstoreapp_themeHeader == 'custom2' %} selected="selected"{% endif %}>Custom 2</option>
+                    <option value="primary" {% if mstoreapp_themeHeader == 'primary' %} selected="selected"{% endif %}>Primary</option>
+                    <option value="secondary" {% if mstoreapp_themeHeader == 'secondary' %} selected="selected"{% endif %}>Secondary</option>
+                    <option value="tertiary" {% if mstoreapp_themeHeader == 'tertiary' %} selected="selected"{% endif %}>Tertiary</option>
+                    <option value="success" {% if mstoreapp_themeHeader == 'success' %} selected="selected"{% endif %}>Success</option>
+                    <option value="warning" {% if mstoreapp_themeHeader == 'warning' %} selected="selected"{% endif %}>Warning</option>
+                    <option value="dark" {% if mstoreapp_themeHeader == 'dark' %} selected="selected"{% endif %}>Dark</option>
+                    <option value="medium" {% if mstoreapp_themeHeader == 'medium' %} selected="selected"{% endif %}>Medium</option>
+                    <option value="light" {% if mstoreapp_themeHeader == 'light' %} selected="selected"{% endif %}>Light</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="theme_TabBar">Tab Bar Color</label>
+                <div class="col-sm-10">
+                  <select name="mstoreapp_themetabBar" id="theme_TabBar" class="form-control">
+                    <option value="background" {% if mstoreapp_themetabBar == 'background' %} selected="selected"{% endif %}>Background</option>
+                    <option value="custom1" {% if mstoreapp_themetabBar == 'custom1' %} selected="selected"{% endif %}>Custom 1</option>
+                    <option value="custom2" {% if mstoreapp_themetabBar == 'custom2' %} selected="selected"{% endif %}>Custom 2</option>
+                    <option value="primary" {% if mstoreapp_themetabBar == 'primary' %} selected="selected"{% endif %}>Primary</option>
+                    <option value="secondary" {% if mstoreapp_themetabBar == 'secondary' %} selected="selected"{% endif %}>Secondary</option>
+                    <option value="tertiary" {% if mstoreapp_themetabBar == 'tertiary' %} selected="selected"{% endif %}>Tertiary</option>
+                    <option value="success" {% if mstoreapp_themetabBar == 'success' %} selected="selected"{% endif %}>Success</option>
+                    <option value="warning" {% if mstoreapp_themetabBar == 'warning' %} selected="selected"{% endif %}>Warning</option>
+                    <option value="dark" {% if mstoreapp_themetabBar == 'dark' %} selected="selected"{% endif %}>Dark</option>
+                    <option value="medium" {% if mstoreapp_themetabBar == 'medium' %} selected="selected"{% endif %}>Medium</option>
+                    <option value="light" {% if mstoreapp_themetabBar == 'light' %} selected="selected"{% endif %}>Light</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="theme_Button">Button Color</label>
+                <div class="col-sm-10">
+                  <select name="mstoreapp_themeButton" value="{{ mstoreapp_themeButton }}" id="theme_Button" class="form-control">
+                    <option value="background" {% if mstoreapp_themeButton == 'background' %} selected="selected"{% endif %}>Background</option>
+                    <option value="custom1" {% if mstoreapp_themeButton == 'custom1' %} selected="selected"{% endif %}>Custom 1</option>
+                    <option value="custom2" {% if mstoreapp_themeButton == 'custom2' %} selected="selected"{% endif %}>Custom 2</option>
+                    <option value="primary" {% if mstoreapp_themeButton == 'primary' %} selected="selected"{% endif %}>Primary</option>
+                    <option value="secondary" {% if mstoreapp_themeButton == 'secondary' %} selected="selected"{% endif %}>Secondary</option>
+                    <option value="tertiary" {% if mstoreapp_themeButton == 'tertiary' %} selected="selected"{% endif %}>Tertiary</option>
+                    <option value="success" {% if mstoreapp_themeButton == 'success' %} selected="selected"{% endif %}>Success</option>
+                    <option value="warning" {% if mstoreapp_themeButton == 'warning' %} selected="selected"{% endif %}>Warning</option>
+                    <option value="dark" {% if mstoreapp_themeButton == 'dark' %} selected="selected"{% endif %}>Dark</option>
+                    <option value="medium" {% if mstoreapp_themeButton == 'medium' %} selected="selected"{% endif %}>Medium</option>
+                    <option value="light" {% if mstoreapp_themeButton == 'light' %} selected="selected"{% endif %}>Light</option>
+                  </select>
+                </div>
+              </div>
+              
+            </div-->
+ 
+
+
+            <!--div class="tab-pane" id="tab-import-demo">
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="demo-blocks">Demo Blocks</label>
+                <div class="col-sm-10">
+                  <select name="mstoreapp_demo_blocks" id="demo-blocks" class="form-control">
+                    <option value="no" {% if mstoreapp_demo_blocks == 'no' %} selected="selected" {% endif %}>None</option>
+                    <option value="basic" {% if mstoreapp_demo_blocks == 'basic' %} selected="selected" {% endif %}>Basic Theme</option>
+                    <option value="fashion" {% if mstoreapp_demo_blocks == 'fashion' %} selected="selected" {% endif %}>Fashion Theme 1</option>
+                    <option value="fashion2" {% if mstoreapp_demo_blocks == 'fashion2' %} selected="selected" {% endif %}>Fashion Theme 2</option>
+                  </select>
+                </div>
+              </div>
+            </div-->
+
+        </div>   
+
+        
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+{{ footer }}
